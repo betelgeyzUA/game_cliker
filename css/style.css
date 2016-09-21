@@ -259,7 +259,7 @@ span#heals {
     line-height: 1.2em;
     text-align: center;
     border-radius: 12px;
-    bottom: 161px;
+    bottom: 360px;
     right: 42px;
 }
 
@@ -328,7 +328,7 @@ div#GameCanvas img{
     position: absolute;
     bottom: 60px;
     right: 65px;
-    height: 85px;
+    height: 200px;
     transition: all 0.2s ease;
 }
 
@@ -382,8 +382,8 @@ div#GameCanvas img{
     text-align: center;
     padding: 5px;
     border-radius: 12px;
-    bottom: 161px;
-    right: 42px;
+    bottom: 280px;
+    right: 145px;
     transition: all 2s ease;
 }
 .arrow_box:after, .arrow_box:before {

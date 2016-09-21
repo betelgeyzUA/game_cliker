@@ -1,10 +1,9 @@
 var application = {
-  //<img src="img/cliker/emeny01.png" id="enemy01">
   i: 0,
 
   enemy: [
-    {name: "Evil Smile", heals: 100, up:1},
-    {name: "Bed Smile", heals: 100, up:1}
+    {name: "Small Golem", heals: 100, up:1},
+    {name: "Wiking", heals: 100, up:1}
   ],
 
   init: function() {

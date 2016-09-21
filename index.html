@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Домашнее задание Spalah</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/grid.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+    <header class="container_12">
+        <div class="top container_12">
+                <div class="top-menu">
+                    <ul id="nav2">
+                        <li class="active"><a href="#">Главная</a></li>
+                        <li><a href="#">Статьи</a></li>
+                        <li><a href="#">Новости</a></li>
+                    </ul>
+                </div>
+            <div class="top-search">
+                <form class="form-wrapper cf">
+                    <input type="text" placeholder="поиск..." required>
+                    <button type="submit">Искать</button>
+                </form>
+
+            </div>
+        </div>
+        <div class="container_12 top2">
+            <div id="logo">
+                <a href="index.html">
+                    <img src="img/logo.png" alt="Текст при отключенных рисунках">
+                </a>
+            </div>
+        </div>
+            <div class="slider">
+                <ul>
+                    <li><img src="img/slider/1.jpg" alt=""></li>
+                    <li><img src="img/slider/2.jpg" alt=""></li>
+                    <li><img src="img/slider/3.jpg" alt=""></li>
+                    <li><img src="img/slider/4.jpg" alt=""></li>
+                    <li><img src="img/slider/5.jpg" alt=""></li>
+                </ul>
+            </div>
+    </header>
+    <div class="container_12 content">
+        <div class="grid_3">
+         -
+        </div>
+        <div class="grid_9">
+            <h1 class="title_game">CLICKER GAMES</h1>
+            <div id="SplashScreen">
+                <input id="StartButton" type="button" value="Start"/>
+            </div>
+            <canvar id="GameCanvas" style="display: none;">
+                <span class="arrow_box" id="info">Attack Enemy</span>
+                <span class="heals"><input type="text" id="enemyHeals" disabled size="2" class="span2"></span>
+                <img src="img/cliker/emeny01.png" id="enemy01"></canvar>
+        </div>
+    </div>
+    <footer></footer>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.js"></script>
+    <script src="js/slider.js"></script>
+    <script type="text/javascript" src="js/application.js"></script>
+</body>
+</html>

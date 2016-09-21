@@ -1,46 +1,73 @@
 var application = {
-  heals: 100,
+  //<img src="img/cliker/emeny01.png" id="enemy01">
+  i: 0,
+
+  enemy: [
+    {name: "Evil Smile", heals: 100, up:1},
+    {name: "Bed Smile", heals: 100, up:1}
+  ],
 
   init: function() {
     console.log('App loaded');
+
     this.initEvants();
-    document.getElementById('enemyHeals' ).value = this.heals;
-    setTimeout(this.info, 3000);
   },
 
   initEvants: function(){
-    console.log('int loaded');
-    var start_button = document.getElementById("StartButton");
-    var myenemy01 = document.getElementById("enemy01");
-    start_button.addEventListener('click', this.clickStart.bind(this));
-    myenemy01.addEventListener('click', this.enemyAttack.bind(this))
+    if (this.enemy.length > this.i) {
+      console.log('int loaded');
+      var img = document.createElement("img");
+      img.setAttribute("id", "enemy"+this.i);
+      img.setAttribute("src", "img/cliker/emeny"+this.i+".png");
+      document.getElementById('GameCanvas').appendChild(img);
+    } else {
+      alert("Game Over");
+    }
+    var start_Button = document.getElementById("StartButton");
+    var enemy01 = document.getElementById("enemy"+this.i);
+    start_Button.addEventListener('click', this.clickStart.bind(this));
+    enemy01.addEventListener('click', this.enemyAttack.bind(this))
   },
 
   clickStart: function (event) {
     console.log("It works Add");
-    document.getElementById('SplashScreen' ).style.display = 'none';
-    document.getElementById('GameCanvas' ).style.display = 'block';
+    document.getElementById('SplashScreen').style.display = 'none';
+    document.getElementById('GameCanvas').style.display = 'block';
   },
 
   enemyAttack: function (event) {
-    console.log("Attack");
-    document.getElementById('enemy01').style.height = "83px" ;
-    if (this.heals > 0) {
-      this.heals -= 2;
-      console.log(this.heals);
-      document.getElementById('enemyHeals' ).value = this.heals;
-    } else {
-      document.getElementById('enemy01').style.display = 'none';
-      alert("Enemy Death");
+
+    if (this.enemy.length > this.i) {
+      var span = document.createElement("span");
+      span.innerHTML = '<span>' + this.enemy[this.i].name + '</span>' + '<input type="text" id="enemyHeals" disabled size="2" class="span2">';
+      span.setAttribute("id", "heals");
+
+      console.log("Attack");
+      var game_Scine = document.getElementById('GameCanvas');
+      if (document.getElementById('info')) {
+        game_Scine.removeChild(document.getElementById("info"));
+      }
+
+      if (!(document.getElementById('heals'))) {
+        game_Scine.appendChild(span);
+        console.log("Add enemyHeals");
+      }
+
+      if (this.enemy[this.i].heals > 0) {
+        this.enemy[this.i].heals -= 10;
+        console.log(this.enemy[this.i].heals);
+        document.getElementById('enemyHeals').value = this.enemy[this.i].heals;
+      } else {
+        game_Scine.removeChild(document.getElementById("heals"));
+        game_Scine.removeChild(document.getElementById('enemy' + this.i));
+        this.i ++;
+        console.log("Enemy Death");
+        this.initEvants();
+      }
     }
-  },
-  
-  info: function () {
-    document.getElementById('info').style.display = 'none';
+
   }
-
 }
-
 
 window.onload = function() {
   application.init();

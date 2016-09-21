@@ -250,7 +250,7 @@ div#logo img {
 
 /*  Heals */
 
-span.heals {
+span#heals {
     position: absolute;
     font-family: "PT Serif","Georgia","Helvetica Neue",Arial,sans-serif;
     font-weight: bold;
@@ -263,12 +263,24 @@ span.heals {
     right: 42px;
 }
 
+span#heals span {
+    font-family: "PT Serif","Georgia","Helvetica Neue",Arial,sans-serif;
+    font-weight: bold;
+    text-rendering: optimizelegibility;
+    font-size: 0.8em;
+    text-align: center;
+    border-radius: 12px;
+    color: #FFFFFF;
+    background: #d83c3c;
+    padding: 4px;
+}
+
 input#enemyHeals {
     width: 50px;
     font-size: 13px;
     padding: 6px 0 4px 10px;
-    border: 0px solid #d83c3c;;
-    background: #d83c3c;;
+    border: 0px solid #d83c3c;
+    background: #d83c3c;
     border-radius: 8px;
     text-align: center;
     margin: 0;
@@ -306,13 +318,13 @@ div#SplashScreen {
     background: #0f0f00;
 }
 
-canvar {
+div#GameCanvas {
     height: 390px;
     position: relative;
     background-image: url("../img/game_bg.jpg");
 }
 
-canvar img{
+div#GameCanvas img{
     position: absolute;
     bottom: 60px;
     right: 65px;

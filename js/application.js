@@ -2,17 +2,19 @@ var application = {
 
   // Переменая счетчик для массива enemy
   i: 0,
+  e_hels_static: 0,
+  sum_Damage: 0,
 
   // Массив противников enemy
   enemy: [
-    {name: "SMALL GOLEM", heals: 100, up:1, enemy_ID: "enemy00", enemy_Img: "img/cliker/emeny0.png"},
-    {name: "VIKING", heals: 110, up:1, enemy_ID: "enemy01", enemy_Img: "img/cliker/emeny1.png"}
+    {name: "SMALL GOLEM", heals: 10, up:1, enemy_ID: "enemy00", enemy_Img: "img/cliker/emeny0.png"},
+    {name: "VIKING", heals: 11, up:1, enemy_ID: "enemy01", enemy_Img: "img/cliker/emeny1.png"}
   ],
 
   // Наш герой
   heroes: {
     name: 'Kurd',
-    attack: 10,
+    attack: 1,
     gold: 0,
     exp: 0
   },
@@ -26,12 +28,15 @@ var application = {
 
   // Инициализация стартового экрана и кнопки старт
   initStart: function () {
+    var div = document.createElement("div");
+    div.setAttribute("id", "center");
+    document.getElementById('SplashScreen').appendChild(div);
     console.log('int start');
     var input = document.createElement("input")
     input.setAttribute("id", "StartButton");
     input.setAttribute("type", "button");
     input.setAttribute("value", "Start");
-    document.getElementById('SplashScreen').appendChild(input);
+    document.getElementById('center').appendChild(input);
 
     var start_Button = document.getElementById("StartButton");
     start_Button.addEventListener('click', this.clickStart.bind(this));
@@ -73,14 +78,16 @@ var application = {
       img.setAttribute("src", this.enemy[this.i].enemy_Img);
       document.getElementById('GameCanvas').appendChild(img);
       this.enemyAddHels();
+      this.e_hels_static = this.enemy[this.i].heals;
+      this.sum_Damage = 0;
     } else {
-      alert("Game Over");
+      console.log("Game Over");
     }
   },
 
   // Удаление противника с DOM дерева при окончании это жизней
   enemyDestroy: function() {
-    document.getElementById('GameCanvas').removeChild(document.getElementById("heals"));
+    document.getElementById('GameCanvas').removeChild(document.getElementById("addenemyHeals"));
     document.getElementById('GameCanvas').removeChild(document.getElementById(this.enemy[this.i].enemy_ID));
     this.i ++;
     console.log("Enemy Death");
@@ -89,15 +96,33 @@ var application = {
 
    // Добавление колонки жизни для противника
    enemyAddHels: function () {
-      var span = document.createElement("span");
-      span.innerHTML = '<span>' + this.enemy[this.i].name + '</span>' + '<input type="text" id="enemyHeals" disabled size="2" class="span2">';
-      span.setAttribute("id", "heals");
+      //var span = document.createElement("span");
+      //span.innerHTML = '<span>' + this.enemy[this.i].name + '</span>' + '<input type="text" id="enemyHeals" disabled size="2" class="span2">';
+      //span.setAttribute("id", "heals");
+     var add_div_heals = document.createElement("div");
+     add_div_heals.setAttribute("id", "addenemyHeals");
 
-     if (!(document.getElementById('heals'))) {
-       document.getElementById('GameCanvas').appendChild(span);
+     var div_heals = document.createElement("div");
+     div_heals.setAttribute("id", "enemyHeals");
+
+     var div_sword = document.createElement("div");
+     div_sword.setAttribute("id", "divsword");
+
+     var span_hels = document.createElement("span");
+     span_hels.setAttribute("id", "spanEnemyHeals");
+
+     if (!(document.getElementById('addenemyHeals'))) {
+       document.getElementById('GameCanvas').appendChild(add_div_heals);
        console.log("Add enemyHeals");
      }
-     document.getElementById('enemyHeals').value = this.enemy[this.i].heals;
+
+     if (!(document.getElementById('enemyHeals'))) {
+       document.getElementById('addenemyHeals').appendChild(div_heals);
+       document.getElementById('enemyHeals').appendChild(div_sword);
+       document.getElementById('divsword').appendChild(span_hels);
+       console.log("enemyHeals");
+     }
+     document.getElementById('spanEnemyHeals').innerHTML = this.enemy[this.i].heals;
    },
 
     // Инфо блок атаковать противника
@@ -114,7 +139,7 @@ var application = {
       document.getElementById('GameCanvas').style.display = 'block';
     },
 
-    // Атака противника при нажатии
+  // Атака противника при нажатии
     enemyAttack: function (event) {
 
       if (this.enemy.length > this.i) {
@@ -126,12 +151,16 @@ var application = {
 
           this.enemy[this.i].heals -= this.heroes.attack;
           console.log(this.enemy[this.i].heals);
-          document.getElementById('enemyHeals').value = this.enemy[this.i].heals;
+          document.getElementById('spanEnemyHeals').innerHTML = this.enemy[this.i].heals;
+          this.sum_Damage += this.heroes.attack;
 
-        } else {
+          if (this.sum_Damage > 0) {
+              document.getElementById('enemyHeals').style.width = 100 - (this.sum_Damage / this.e_hels_static * 100) + '%';
+            if (this.enemy[this.i].heals <= 0) {
+              this.enemyDestroy();
+            }
 
-          this.enemyDestroy();
-
+          }
         }
 
       }
